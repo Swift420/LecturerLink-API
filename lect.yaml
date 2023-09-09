@@ -1,0 +1,204 @@
+openapi: "3.0.1"
+
+info:
+  title: Lecturer API
+  version: "0.0.1"
+
+servers:
+  - url: http://localhost:7070/api/v1
+
+paths:
+  /lecturers:
+    get:
+      summary: Get all lecturers
+      operationId: get_all
+      description: Returns all lecturers
+      responses:
+        "200":
+          description: "A list of all lecturers"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Lecturer"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+    post:
+      summary: Create a new lecturer
+      operationId: create
+      description: Create a new lecturer and add it to the collection of lecturers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Lecturer"
+      responses:
+        "201":
+          description: Lecturer successfully created
+          content:
+            application/json:
+              schema:
+                properties:
+                  staffnumber:
+                    type: string
+                    description: the staff number of the lecturer newly created
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+  /lecturer/{staffnumber}:
+    parameters:
+      - name: staffnumber
+        in: path
+        description: staff number of the lecturer
+        schema:
+          type: string
+        required: true
+    get:
+      summary: Get a single lecturer
+      operationId: get_lecturer
+      description: Returns a single lecturer based on the staff number
+      responses:
+        "200":
+          description: lecturer response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lecturer"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+    put:
+      summary: Update an existing lecturer
+      operationId: update_lecturer
+      description: updates an existing lecturer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Lecturer"
+      responses:
+        "200":
+          description: "Lecturer was successfully updated"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lecturer"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+    delete:
+      summary: Delete an existing lecturer
+      operationId: delete_lecturer
+      description: deletes an existing lecturer
+      responses:
+        "204":
+          description: Lecturer was successfully deleted
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+  /lecturer/{staffnumber}/courses:
+    parameters:
+      - name: staffnumber
+        in: path
+        description: staff number of the lecturer
+        schema:
+          type: string
+        required: true
+
+    get:
+      summary: Get all courses taught by a lecturer
+      operationId: get_lecturer_courses
+      description: Returns all courses taught by a specific lecturer
+      responses:
+        "200":
+          description: "A list of courses taught by the lecturer"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Course"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+  /lecturer/{staffnumber}/office:
+    parameters:
+      - name: staffnumber
+        in: path
+        description: staff number of the lecturer
+        schema:
+          type: string
+        required: true
+
+    get:
+      summary: Get all lecturers in the same office
+      operationId: get_lecturers_in_office
+      description: Returns all lecturers who share the same office with a specific lecturer
+      responses:
+        "200":
+          description: "A list of lecturers in the same office"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Lecturer"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+components:
+  schemas:
+    Lecturer:
+      title: Lecturer Description
+      type: object
+      properties:
+        staffnumber:
+          type: string
+          description: the staff number of the lecturer
+        officenumber:
+          type: string
+          description: the office number of the lecturer
+        staffname:
+          type: string
+          description: the name of the lecturer
+        title:
+          type: string
+          description: the title of the lecturer
+        courses:
+          type: array
+          description: Array of courses taught by the lecturer
+          items:
+            $ref: "#/components/schemas/Course"
+
+    Course:
+      type: object
+      properties:
+        coursename:
+          type: string
+          description: the course name
+        coursecode:
+          type: string
+          description: the course code
+        nqflevel:
+          type: integer
+          description: the NQF level of the course
+
+    Error:
+      type: object
+      properties:
+        errorType:
+          type: string
+          enum:
+            - BadRequest
+            - NotFound
+            - InternalServerError
+        message:
+          type: string
+
+  responses:
+    ErrorResponse:
+      description: Error handling lecturer
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
