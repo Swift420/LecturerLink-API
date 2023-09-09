@@ -1,7 +1,5 @@
 # LecturerLink API Documentation
 
-## Introduction
-
 This repository contains the implementation of a RESTful API for effectively managing staff, their offices, and allocated courses within the Faculty of Computing and Informatics. The API is designed to provide the following functionalities:
 
 1. **Add a New Lecturer**
