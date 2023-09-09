@@ -108,7 +108,6 @@ service /api/v1 on ep0 {
                 lecturer.officenumber = <string>payload.officenumber;
                 lecturer.staffname = <string>payload.staffname;
                 lecturer.title = <string>payload.title;
-                lecturer.courses = <Course[]>payload.courses;
 
                 return lecturer;
             }

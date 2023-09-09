@@ -82,14 +82,12 @@ function UpdateLecturerRequest() returns error? {
     string staffName = io:readln("Enter New Staff Name: ");
     string title = io:readln("Enter New Title: ");
 
-    // You can add code to update the courses if needed
-
     Lecturer updateLecturer = {
         staffnumber: staffNumber,
         officenumber: officeNumber,
         staffname: staffName,
         title: title,
-        courses: [] // Add the updated courses here if needed
+        courses: []
     };
 
     io:println("\nPUT request:");
