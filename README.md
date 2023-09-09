@@ -1,25 +1,18 @@
-# Lecturer Management API
-The problem centers on developing a Restful API for effectively managing staff, their offices, and
-allocated courses within the Faculty of Computing and Informatics. These offices can
-accommodate multiple lecturers. A lecturer is characterized by essential attributes, including a
-staff number, office number, staff name, title, and a list of the courses they are teaching.
-Additionally, a course is characterized by specific details such as the course name, course code,
-and NQF (National Qualifications Framework) leve
+# LecturerLink API Documentation
 
-The API has the following functionalities:
--  Add a new lecturer
--  Retrieve a list of all lecturers within the faculty.
--  Update an existing lecturer's information.
--  Retrieve the details of a specific lecturer by their staff number.
--  Delete a lecturer's record by their staff number.
--  Retrieve all the lecturers that teach a certain course.
--  Retrieve all the lecturers that sit in the same office.
+## Introduction
 
-Note that the staff number should serve as a unique identifier for a lecturer
+This repository contains the implementation of a RESTful API for effectively managing staff, their offices, and allocated courses within the Faculty of Computing and Informatics. The API is designed to provide the following functionalities:
 
+1. **Add a New Lecturer**
+2. **Retrieve a list of all lecturers within the faculty.**
+3. **Update an existing lecturer's information.**
+4. **Retrieve the details of a specific lecturer by their staff number.**
+5. **Delete a lecturer's record by their staff number.**
+6. **Retrieve all the lecturers that teach a certain course.**
+7. **Retrieve all the lecturers that sit in the same office.**
 
-##### Technologies Used
+The API adheres to the OpenAPI standard and is implemented using the Ballerina programming language.
 
-- Ballerina
 
 
